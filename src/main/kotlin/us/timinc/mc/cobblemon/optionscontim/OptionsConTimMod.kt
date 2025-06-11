@@ -15,7 +15,8 @@ object OptionsConTimMod : ModInitializer {
 
     init {
         CobblemonEvents.THROWN_POKEBALL_HIT.subscribe { evt ->
-            if (!evt.pokemon.isBattling && !config.outOfBattleCaptures) evt.cancel()
+            val pokemon = evt.pokemon.pokemon
+            if (!evt.pokemon.isBattling && !config.outOfBattleCaptures.getValue(pokemon)) evt.cancel()
         }
     }
 
